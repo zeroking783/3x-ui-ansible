@@ -1,0 +1,20 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for 3x_ui_docker
+
+- name: Create directory for repo 3x-ui
+  ansible.builtin.file:
+    path: /home/3x-ui
+    state: directory
+    mode: 0755
+
+- name: Clone repo 3x-ui
+  ansible.builtin.git:
+    repo: https://github.com/MHSanaei/3x-ui.git
+    dest: /home/3x-ui
+
+- name: Start docker container with 3x-ui
+  community.docker.docker_compose_v2:
+    project_src: /home/3x-ui
+    files:
+    - docker-compose.yml
