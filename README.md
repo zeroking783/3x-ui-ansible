@@ -1,10 +1,5 @@
 # Автоматическое развертывание панели 3x-ui на серверах в контейнере Docker
 
-
-
-
----
-
 clone repo https://github.com/zeroking783/3x-ui-ansible.git
 
 ---
