@@ -28,7 +28,7 @@ RUN bash install.sh
 
 WORKDIR /usr/local/x-ui
 
-RUN ./x-ui setting -port ${PORT} -username ${USERNAME} -password ${PASSWORD} -webBasePath ${WEBBASEPATH}
+RUN ./x-ui setting -port ${VPN_PORT} -username ${VPN_USERNAME} -password ${VPN_PASSWORD} -webBasePath ${VPN_WEB_BASE_PATH}
 
 RUN ./x-ui restart
 
