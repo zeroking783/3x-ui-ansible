@@ -1,5 +1,9 @@
 # Автоматическое развертывание панели 3x-ui на серверах в контейнере Docker
 
+---
+clone repo https://github.com/zeroking783/3x-ui-ansible.git
+---
+
 - Добавляем ip серверов в hosts.ini
 - Запускаем ansible playbook командой *ansible-playbook -i hosts.ini playbook.yml -e "vpn_id_user=value vpn_username=value vpn_password=value vpn_port=value vpn_web_base_path=value"*
 - Complete!
