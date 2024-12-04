@@ -1,0 +1,54 @@
+[WARNING]: Invalid characters were found in group names but not replaced, use
+-vvvv to see details
+[WARNING]: Found variable using reserved name: action
+
+PLAY [start docker] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[WARNING]: Platform linux on host server1 is using the discovered Python
+interpreter at /usr/bin/python3.10, but future installation of another Python
+interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-
+core/2.18/reference_appendices/interpreter_discovery.html for more information.
+ok: [server1]
+
+TASK [docker : Check docker version] *******************************************
+included: /home/bakvivas/Documents/Projects/ansible-role-3x-ui/roles/docker/tasks/check_docker.yml for server1
+
+TASK [docker : Check Docker is installed] **************************************
+changed: [server1]
+
+TASK [docker : Docker version?] ************************************************
+changed: [server1]
+
+TASK [docker : Debug docker version if Docker is installed] ********************
+ok: [server1] => {
+    "msg": "Docker version 27.3.1, build ce12230"
+}
+
+TASK [docker : Debug docker version if Docker is not installed] ****************
+skipping: [server1]
+
+TASK [docker : Install docker if it is not there] ******************************
+skipping: [server1]
+
+TASK [3x_ui_container : Debug action] ******************************************
+skipping: [server1]
+
+TASK [3x_ui_container : Build, run container] **********************************
+skipping: [server1]
+
+TASK [3x_ui_container : Stop container] ****************************************
+skipping: [server1]
+
+TASK [3x_ui_container : Start container] ***************************************
+included: /home/bakvivas/Documents/Projects/ansible-role-3x-ui/roles/3x_ui_container/tasks/start_container.yml for server1
+
+TASK [3x_ui_container : Debug vpn_id_user] *************************************
+skipping: [server1]
+
+TASK [3x_ui_container : Debug vpn_username] ************************************
+fatal: [server1]: FAILED! => {"msg": "The conditional check ''vpn_username' in extravars.keys()' failed. The error was: error while evaluating conditional ('vpn_username' in extravars.keys()): 'extravars' is undefined\n\nThe error appears to be in '/home/bakvivas/Documents/Projects/ansible-role-3x-ui/roles/3x_ui_container/tasks/start_container.yml': line 14, column 3, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n- name: Debug vpn_username\n  ^ here\n"}
+
+PLAY RECAP *********************************************************************
+server1                    : ok=6    changed=2    unreachable=0    failed=1    skipped=6    rescued=0    ignored=0   

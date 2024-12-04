@@ -1,0 +1,41 @@
+### Останавливает контейнер, нужно задать
+### - vpn_id_user
+### Контейнер же останавливается по имени
+
+
+
+### CHECK VARIABLES START ###
+
+#- name: Debug vpn_id_user
+#  fail:
+#    msg: "Variable vpn_id_user is necessary"
+#  when: vpn_id_user == "vpn_id_user"
+#
+#- name: Debug vpn_username
+#  fail:
+#    msg: "No variable vpn_username need"
+#  when: vpn_username is defined
+#
+#- name: Debug vpn_password
+#  fail:
+#    msg: "No variable vpn_password need"
+#  when: vpn_password is defined
+#
+#- name: Debug vpn_port
+#  fail:
+#    msg: "No variable vpn_port need"
+#  when: vpn_port is defined
+#
+#- name: Debug vpn_web_base_path
+#  fail:
+#    msg: "No variable vpn_web_base_path need"
+#  when: vpn_web_base_path is defined
+
+### CHECK VARIABLES END ###
+
+
+
+- name: stop container
+  ansible.builtin.command:
+    cmd: >
+      docker stop 3x-ui-{{ vpn_id_user }}

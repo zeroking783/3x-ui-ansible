@@ -1,0 +1,70 @@
+### Этот скрипт используется для создания и запуска нового контейнера для пользователя
+### - vpn_id_user
+### - vpn_username
+### - vpn_password
+### - vpn_port
+### - vpn_web_base_path
+
+
+
+### CHECK VARIABLES START ###
+
+#- name: Debug vpn_id_user
+#  fail:
+#    msg: "Variable vpn_id_user is necessary"
+#  when: vpn_id_user == "vpn_id_user"
+#
+#- name: Debug vpn_username
+#  fail:
+#    msg: "Variable vpn_username is necessary"
+#  when: vpn_username == "vpn_username"
+#
+#- name: Debug vpn_password
+#  fail:
+#    msg: "Variable vpn_password is necessary"
+#  when: vpn_password == "vpn_password"
+#
+#- name: Debug vpn_port
+#  fail:
+#    msg: "Variable vpn_port is necessary"
+#  when: vpn_port == "vpn_port"
+#
+#- name: Debug vpn_web_base_path
+#  fail:
+#    msg: "Variable vpn_web_base_path is necessary"
+#  when: vpn_web_base_path == "vpn_web_base_path"
+
+### CHECK VARIABLES END ###
+
+
+
+- name: Create directory for Dockerfile
+  ansible.builtin.file:
+    path: /home/3x-ui
+    state: directory
+    mode: '0755'
+
+- name: Download Dockerfile
+  ansible.builtin.get_url:
+    url: "https://gitlab.com/zeroking783/3x-ui-ansible/-/raw/main/Dockerfile"
+    dest: /home/3x-ui/Dockerfile
+    mode: '0755'
+
+- name: Build Docker image for VPN
+  ansible.builtin.command:
+    cmd: >
+      docker build -t 3x-ui-{{ vpn_id_user }}:latest
+      --build-arg VPN_USERNAME={{ vpn_username }}
+      --build-arg VPN_PASSWORD={{ vpn_password }}
+      --build-arg VPN_PORT={{ vpn_port }}
+      --build-arg VPN_WEB_BASE_PATH={{ vpn_web_base_path }}
+      .
+  args:
+    chdir: /home/3x-ui
+
+- name: Run VPN container
+  ansible.builtin.command:
+    cmd: >
+      docker run -d --name 3x-ui-{{ vpn_id_user }}
+      -p {{ vpn_port }}:{{ vpn_port }}
+      3x-ui-{{ vpn_id_user }}:latest

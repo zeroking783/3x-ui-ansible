@@ -1,0 +1,74 @@
+[WARNING]: Invalid characters were found in group names but not replaced, use
+-vvvv to see details
+[WARNING]: Found variable using reserved name: action
+
+PLAY [start docker] ************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[WARNING]: Platform linux on host server1 is using the discovered Python
+interpreter at /usr/bin/python3.10, but future installation of another Python
+interpreter could change the meaning of that path. See
+https://docs.ansible.com/ansible-
+core/2.18/reference_appendices/interpreter_discovery.html for more information.
+ok: [server1]
+
+TASK [docker : Check docker version] *******************************************
+included: /home/bakvivas/Documents/Projects/ansible-role-3x-ui/roles/docker/tasks/check_docker.yml for server1
+
+TASK [docker : Check Docker is installed] **************************************
+changed: [server1]
+
+TASK [docker : Docker version?] ************************************************
+changed: [server1]
+
+TASK [docker : Debug docker version if Docker is installed] ********************
+ok: [server1] => {
+    "msg": "Docker version 27.3.1, build ce12230"
+}
+
+TASK [docker : Debug docker version if Docker is not installed] ****************
+skipping: [server1]
+
+TASK [docker : Install docker if it is not there] ******************************
+skipping: [server1]
+
+TASK [3x_ui_container : Debug action] ******************************************
+skipping: [server1]
+
+TASK [3x_ui_container : Build, run container] **********************************
+skipping: [server1]
+
+TASK [3x_ui_container : Stop container] ****************************************
+skipping: [server1]
+
+TASK [3x_ui_container : Start container] ***************************************
+ERROR! We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 1 column 1 (char 0)
+
+Syntax Error while loading YAML.
+  did not find expected key. while parsing a block mapping
+  in "<unicode string>", line 14, column 3
+did not find expected key
+  in "<unicode string>", line 17, column 24
+
+The error appears to be in '/home/bakvivas/Documents/Projects/ansible-role-3x-ui/roles/3x_ui_container/tasks/start_container.yml': line 17, column 24, but may
+be elsewhere in the file depending on the exact syntax problem.
+
+The offending line appears to be:
+
+    msg: "No variable vpn_username need"
+  when: 'vpn_username' in extravars.keys()
+                       ^ here
+This one looks easy to fix. It seems that there is a value started
+with a quote, and the YAML parser is expecting to see the line ended
+with the same kind of quote. For instance:
+
+    when: "ok" in result.stdout
+
+Could be written as:
+
+   when: '"ok" in result.stdout'
+
+Or equivalently:
+
+   when: "'ok' in result.stdout"

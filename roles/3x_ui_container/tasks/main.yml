@@ -2,33 +2,35 @@
 ---
 # tasks file for 3x_ui_container
 
-- name: Create directory for Dockerfile
-  ansible.builtin.file:
-    path: /home/3x-ui
-    state: directory
-    mode: '0755'
 
-- name: Download Dockerfile
-  ansible.builtin.get_url:
-    url: "https://gitlab.com/zeroking783/3x-ui-ansible/-/raw/main/Dockerfile"
-    dest: /home/3x-ui/Dockerfile
-    mode: '0755'
 
-- name: Build Docker image for VPN
-  ansible.builtin.command:
-    cmd: >
-      docker build -t 3x-ui-{{ vpn_id_user }}:latest
-      --build-arg VPN_USERNAME={{ vpn_username }}
-      --build-arg VPN_PASSWORD={{ vpn_password }}
-      --build-arg VPN_PORT={{ vpn_port }}
-      --build-arg VPN_WEB_BASE_PATH={{ vpn_web_base_path }}
-      .
-  args:
-    chdir: /home/3x-ui
+### CHECK VARIABLES START ###
 
-- name: Run VPN container
-  ansible.builtin.command:
-    cmd: >
-      docker run -d --name 3x-ui-{{ vpn_id_user }}
-      -p {{ vpn_port }}:{{ vpn_port }}
-      3x-ui-{{ vpn_id_user }}:latest
+#- name: Debug action
+#  fail:
+#    msg: "action has the wrong meaning"
+#  when: action not in ["build_image", "stop_container", "start_container", "delete_image"]
+
+### CHECK VARIABLES END ###
+
+
+- name: Include defaults
+  include_vars:
+    file: "{{ role_path }}/defaults/main.yml"
+
+- name: Build, run container
+  include_tasks: first_start.yml
+  when: action == "build_image"
+
+- name: Stop container
+  include_tasks: stop_container.yml
+  when: action == "stop_container"
+
+- name: Start container
+  include_tasks: start_container.yml
+  when: action == "start_container"
+
+- name: Delete image
+  include_tasks: delete_image.yml
+  when: action == "delete_image"
+

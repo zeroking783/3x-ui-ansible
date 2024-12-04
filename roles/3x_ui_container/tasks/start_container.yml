@@ -1,0 +1,45 @@
+### Этот скрипт нужен для запуска контейнера, который на паузе
+### - vpn_id_user
+### Ну чтобы запустить нужно знать name of container
+
+
+
+### CHECK VARIABLES START ###
+
+#- name: Debug vpn_id_user
+#  fail:
+#    msg: "Variable vpn_id_user is necessary"
+#  when: vpn_id_user == "vpn_id_user"
+#
+#- name: Debug
+#  debug:
+#    msg: "{{ vpn_username | default('No vpn_username defined') }}"
+#
+#- name: Debug vpn_username
+#  fail:
+#    msg: "No variable vpn_username need"
+#  when: vpn_username is none or vpn_username != ''
+#
+#- name: Debug vpn_password
+#  fail:
+#    msg: "No variable vpn_password need"
+#  when: vpn_password != "vpn_password"
+#
+#- name: Debug vpn_port
+#  fail:
+#    msg: "No variable vpn_port need"
+#  when: vpn_port != "vpn_port"
+#
+#- name: Debug vpn_web_base_path
+#  fail:
+#    msg: "No variable vpn_web_base_path need"
+#  when: vpn_web_base_path != "vpn_web_base_path"
+
+### CHECK VARIABLES END ###
+
+
+
+- name: Start container {{ vpn_id_user }}
+  ansible.builtin.command:
+    cmd: >
+      docker start 3x-ui-{{ vpn_id_user }}
