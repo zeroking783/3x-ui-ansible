@@ -2,10 +2,10 @@ FROM ubuntu:22.04
 
 ENV TZ=Europe/Moscow
 
-ARG VPN_PORT=64444
-ARG VPN_USERNAME=admin123
-ARG VPN_PASSWORD=password123
-ARG VPN_WEB_BASE_PATH=mamamamamama
+ARG VPN_PORT
+ARG VPN_USERNAME
+ARG VPN_PASSWORD
+ARG VPN_WEB_BASE_PATH
 
 RUN apt-get update && apt-get install -y \
     bash \

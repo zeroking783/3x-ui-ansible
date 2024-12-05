@@ -1,2 +1,3 @@
-hosts.ini
-
+password_for_decrypt_hosts.txt
+/artifacts
+/env
