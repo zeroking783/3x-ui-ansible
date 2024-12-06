@@ -26,5 +26,8 @@ build-job:
     - echo "DECRYPT HOSTS"
     - echo $PASSWORD_DECRYPT_HOSTS > password_for_decrypt_hosts.txt
     - ansible-vault decrypt hosts.ini --vault-password-file password_for_decrypt_hosts.txt
+    - echo "DEBUG"
+    - cat hosts.ini
+    - ls -la
     - echo "RUNNING PYTHON SCRIPT"
     - python3 main.py
