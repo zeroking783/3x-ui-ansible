@@ -1,0 +1,20 @@
+stages:          
+  - deploy
+
+build-job:     
+  stage: deploy
+  tags:
+      - deploy_prod
+  rules:
+      - if: $CI_COMMIT_BRANCH == "main"
+  script:
+    - echo "--- DEPLOY STARTED ---"
+    - echo "CLONING THE REPOSITORY"
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/zeroking783/3x-ui-ansible.git /home/3x-ui-ansible
+    - cd /home/3x-ui-ansible
+    - echo "SETTING UP THE ENVIRONMENT"
+    - python3 -m venv .venv
+    - source .venv/bin/activate
+    - pip install -r requirements.txt
+    - echo "RUNNING PYTHON SCRIPT"
+    - python3 main.py
