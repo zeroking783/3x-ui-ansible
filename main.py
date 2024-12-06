@@ -34,7 +34,7 @@ def get_server_ip(server_name, ini_file="hosts.ini"):
 
 def run_ansible_playbook(extravars, limit):
     playbook = "playbook.yml"
-    private_data_dir = f"{HOME_DIRECTORY}/ansible-role-3x-ui"
+    private_data_dir = f"{HOME_DIRECTORY}"
     inventory = f"{HOME_DIRECTORY}/hosts.ini"
 
     result = ansible_runner.run(

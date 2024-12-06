@@ -16,6 +16,7 @@ build-job:
   script:
     - echo "--- DEPLOY STARTED ---"
     - echo "CLONING THE REPOSITORY"
+    - mkdir $HOME_DIRECTORY
     - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/zeroking783/3x-ui-ansible.git $HOME_DIRECTORY
     - cd $HOME_DIRECTORY
     - echo "SETTING UP THE ENVIRONMENT"
