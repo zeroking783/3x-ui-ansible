@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 API_TOKEN = os.getenv("BOT_API_TOKEN")
+HOME_DIRECTORY = os.getenv("HOME_DIRECTORY")
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
@@ -33,8 +34,8 @@ def get_server_ip(server_name, ini_file="hosts.ini"):
 
 def run_ansible_playbook(extravars, limit):
     playbook = "playbook.yml"
-    private_data_dir = "/home/bakvivas/Documents/Projects/ansible-role-3x-ui"
-    inventory = "/home/bakvivas/Documents/Projects/ansible-role-3x-ui/hosts.ini"
+    private_data_dir = f"{HOME_DIRECTORY}/ansible-role-3x-ui"
+    inventory = f"{HOME_DIRECTORY}/hosts.ini"
 
     result = ansible_runner.run(
         private_data_dir=private_data_dir,

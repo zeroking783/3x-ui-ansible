@@ -2,7 +2,7 @@ image: python:3.9
 
 before_script:
   - apt-get update -y && apt-get install -y python3-venv python3-pip ansible
-  - pip install --upgrade pip
+  - pip install --upgrade pipу
 
 stages:
   - deploy
@@ -16,8 +16,8 @@ build-job:
   script:
     - echo "--- DEPLOY STARTED ---"
     - echo "CLONING THE REPOSITORY"
-    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/zeroking783/3x-ui-ansible.git /home/3x-ui-ansible
-    - cd /home/3x-ui-ansible
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/zeroking783/3x-ui-ansible.git $HOME_DIRECTORY
+    - cd $HOME_DIRECTORY
     - echo "SETTING UP THE ENVIRONMENT"
     - python3 -m venv .venv
     - source .venv/bin/activate
