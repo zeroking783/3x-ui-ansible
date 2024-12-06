@@ -13,6 +13,7 @@ load_dotenv()
 
 API_TOKEN = os.getenv("BOT_API_TOKEN")
 HOME_DIRECTORY = os.getenv("HOME_DIRECTORY")
+SERVER1_SSH_PASS = os.getenv("SERVER1_SSH_PASS")
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher()
@@ -43,6 +44,7 @@ def run_ansible_playbook(extravars, limit):
         playbook=playbook,
         extravars=extravars,
         limit=limit,
+        ansible_password=SERVER1_SSH_PASS
     )
 
     print(f"Статус: {result.status}")
