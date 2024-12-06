@@ -2,7 +2,7 @@ image: python:3.9
 
 before_script:
   - apt-get update -y && apt-get install -y python3-venv python3-pip ansible
-  - pip install --upgrade pipу
+  - pip install --upgrade pip
 
 stages:
   - deploy
