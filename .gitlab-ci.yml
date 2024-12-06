@@ -1,7 +1,7 @@
-stages:
+stages:          
   - deploy
 
-build-job:
+build-job:     
   stage: deploy
   tags:
       - deploy_prod
