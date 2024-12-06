@@ -43,8 +43,7 @@ def run_ansible_playbook(extravars, limit):
         inventory=inventory,
         playbook=playbook,
         extravars=extravars,
-        limit=limit,
-        ansible_password=SERVER1_SSH_PASS
+        limit=limit
     )
 
     print(f"Статус: {result.status}")
