@@ -16,5 +16,8 @@ build-job:
     - python3 -m venv .venv
     - source .venv/bin/activate
     - pip install -r requirements.txt
+    - echo "DECRYPT HOSTS"
+    - echo $PASSWORD_DECRYPT_HOSTS > password_for_decrypt_hosts.txt
+    - ansible-vault decrypt hosts.ini --vault-password-file password_for_decrypt_hosts.txt
     - echo "RUNNING PYTHON SCRIPT"
     - python3 main.py
