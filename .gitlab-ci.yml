@@ -1,7 +1,12 @@
-stages:          
+image: python:3.8
+
+before_script:
+  - apt-get update -y && apt-get install -y python3-venv python3-pip ansible
+
+stages:
   - deploy
 
-build-job:     
+build-job:
   stage: deploy
   tags:
       - general_prod
