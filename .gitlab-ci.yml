@@ -1,7 +1,7 @@
 image: python:3.9
 
 before_script:
-  - apt-get update -y && apt-get install -y python3-venv python3-pip ansible
+  - apt-get update -y && apt-get install -y python3-venv python3-pip ansible sshpass
   - pip install --upgrade pip
 
 stages:
